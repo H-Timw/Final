@@ -1,0 +1,22 @@
+.display{
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+  background-color: aliceblue;
+  border-radius: 10px;
+}
+.unchange-data{
+  display: flex;
+  font-size: 20px;
+  min-height: 23px;
+}
+.result, .operation{
+  margin: 0 5px;
+}
+.operand{
+  font-size: 36px;
+  min-height: 41px;
+}

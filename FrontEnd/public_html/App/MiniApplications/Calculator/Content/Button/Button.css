@@ -1,0 +1,16 @@
+.btn{ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  height: 50px;
+  width: 95px;
+  background-color: white;
+}
+.btn img{
+  width: 15px;
+  height: 15px;
+}
+.btn[value="."]{
+  font-size: 30px;
+}

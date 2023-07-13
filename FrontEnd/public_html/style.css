@@ -1,0 +1,17 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-size: 16;
+  font-family: 'Courier New', Courier, monospace; */
+}
+img{
+  width: 100%;
+}
+#root{
+  height: 100vh;
+}
+/* khong biet ly do loi nay, ghi de css de xoa */
+h1{
+  text-shadow: none;
+}
