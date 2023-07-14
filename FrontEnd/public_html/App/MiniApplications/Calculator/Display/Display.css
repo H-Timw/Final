@@ -1,4 +1,4 @@
-.display{
+.display {
   height: 100px;
   display: flex;
   flex-direction: column;
@@ -8,15 +8,16 @@
   background-color: aliceblue;
   border-radius: 10px;
 }
-.unchange-data{
+.unchange-data {
   display: flex;
   font-size: 20px;
   min-height: 23px;
 }
-.result, .operation{
+.result,
+.operation {
   margin: 0 5px;
 }
-.operand{
+.operand {
   font-size: 36px;
   min-height: 41px;
 }

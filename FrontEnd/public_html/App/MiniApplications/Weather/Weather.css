@@ -1,4 +1,4 @@
-:root{
+:root {
   --bg-url: ;
 }
 * {
@@ -23,13 +23,26 @@ html {
   justify-content: center;
   align-items: center;
 }
-.bg-hot{
-  background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url("./imgs/hot.png") no-repeat center/cover;
+.bg-hot {
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
+    url("./imgs/hot.png") no-repeat center/cover;
 }
-.bg-cold{
-  background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url("./imgs/cold.png") no-repeat center/cover;
+.bg-cold {
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
+    url("./imgs/cold.png") no-repeat center/cover;
 }
-.weather-app, #weather, #search-box:focus, h1, h2, h3, h4, h5, h6, span {  transition: all 0.3s ease-in-out;}
+.weather-app,
+#weather,
+#search-box:focus,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  transition: all 0.3s ease-in-out;
+}
 
 #weather {
   text-align: center;
@@ -49,33 +62,33 @@ html {
   background-color: rgba(255, 255, 255, 0.5);
   padding: 1.5rem 2rem;
   border: 1px solid inherit;
-  border-radius: 0 1.5rem ;
-  box-shadow: 0 0.5rem 0.5rem rgba(0,0,0,0.3);
+  border-radius: 0 1.5rem;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
   color: black;
   font-size: 2rem;
 }
-#search-box:focus{
+#search-box:focus {
   border: 1px solid inherit;
   border-radius: 1.5rem 0;
   background-color: rgba(255, 255, 255, 0.8);
 }
 h1 {
   font-size: 4rem;
-  text-shadow: 2px 3px rgba(0,0,0,0.7);
+  text-shadow: 2px 3px rgba(0, 0, 0, 0.7);
 }
 #date-n-time {
   font-size: 1.6rem;
   font-weight: normal;
-  margin : 1rem 0;
+  margin: 1rem 0;
 }
 #tempt {
   text-align: center;
   width: 70%;
-  height: 16rem;  
+  height: 16rem;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 2rem;
-  text-shadow: 4px 5px rgba(0,0,0,0.7);
-  box-shadow: 4px 5px rgba(0,0,0,0.7);
+  text-shadow: 4px 5px rgba(0, 0, 0, 0.7);
+  box-shadow: 4px 5px rgba(0, 0, 0, 0.7);
   font-size: 6rem;
   line-height: 6rem;
   font-weight: bold;

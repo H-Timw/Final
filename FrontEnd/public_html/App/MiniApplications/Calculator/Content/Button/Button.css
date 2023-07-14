@@ -1,4 +1,4 @@
-.btn{ 
+.btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,10 +7,10 @@
   width: 95px;
   background-color: white;
 }
-.btn img{
+.btn img {
   width: 15px;
   height: 15px;
 }
-.btn[value="."]{
+.btn[value="."] {
   font-size: 30px;
 }

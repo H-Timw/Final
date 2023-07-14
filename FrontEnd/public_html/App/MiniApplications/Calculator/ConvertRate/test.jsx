@@ -1,13 +1,9 @@
-import React from 'react';
+import React from "react";
 
-const INITIAL_LIST = [
-  'Learn React',
-  'Learn Firebase',
-  'Learn GraphQL',
-];
+const INITIAL_LIST = ["Learn React", "Learn Firebase", "Learn GraphQL"];
 
 const ListWithAddItem = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
   const [list, setList] = React.useState(INITIAL_LIST);
 
   const handleChange = (event) => {
@@ -19,7 +15,7 @@ const ListWithAddItem = () => {
       setList(list.concat(value));
     }
 
-    setValue('');
+    setValue("");
 
     event.preventDefault();
   };
@@ -27,7 +23,7 @@ const ListWithAddItem = () => {
   return (
     <div>
       <ul>
-        {list.map(item => (
+        {list.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>

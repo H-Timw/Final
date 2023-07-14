@@ -1,4 +1,4 @@
-.Content{
+.Content {
   display: grid;
   grid-template-columns: auto auto auto auto;
   height: 300px;
@@ -7,7 +7,7 @@
   gap: 10px;
   margin-top: 20px;
 }
-.btn{ 
+.btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,10 +18,10 @@
   border-radius: 10px;
   border-color: transparent;
 }
-.btn img{
+.btn img {
   width: 15px;
   height: 15px;
 }
-.btn[value="."]{
+.btn[value="."] {
   font-size: 30px;
 }

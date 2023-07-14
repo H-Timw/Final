@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { InputNumber, Form, Button, Select, Space } from 'antd';
-import { useEffect, useState } from 'react';
-import { SwapOutlined } from '@ant-design/icons';
+import { InputNumber, Form, Button, Select, Space } from "antd";
+import { useEffect, useState } from "react";
+import { SwapOutlined } from "@ant-design/icons";
 const { Item } = Form;
 
 export default function ConvertRate() {
@@ -14,30 +14,32 @@ export default function ConvertRate() {
   const [swap, setSwap] = useState(false);
 
   const onFinish = () => {
-    getval2( val1 * tiSo1 / tiSo2);
-  }
-  const onFinishFailed = () => {console.log("onFinishFailed")}
+    getval2((val1 * tiSo1) / tiSo2);
+  };
+  const onFinishFailed = () => {
+    console.log("onFinishFailed");
+  };
   const getinput1 = (value) => {
     setval1(value);
-  }
-  const select1 = (value,options) => {
-    setTiSo1(value)
+  };
+  const select1 = (value, options) => {
+    setTiSo1(value);
     setSymbol1(options.symbol);
-  }
-  const select2 = (value,options) => {
-    setTiSo2(value)
-    setSymbol2(options.symbol)
-  }
+  };
+  const select2 = (value, options) => {
+    setTiSo2(value);
+    setSymbol2(options.symbol);
+  };
   const swapfc = () => {
     setval1(val2);
     let tmp = tiSo1;
     setTiSo1(tiSo2);
     setTiSo2(tmp);
     onFinish();
-  }
+  };
   useEffect(() => {
     swapfc();
-  },[swap])
+  }, [swap]);
   const options = [
     {
       key: 1,
@@ -67,55 +69,49 @@ export default function ConvertRate() {
       key: 5,
       label: "WON",
       value: 17000,
-      symbol:"W"
-    }
+      symbol: "W",
+    },
   ];
 
   return (
     <Form
-      name='formconvert'
-      layout='vertical'
+      name="formconvert"
+      layout="vertical"
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}  
+      onFinishFailed={onFinishFailed}
     >
-      <Space style={{display:'flex', flexDirection:"column", alignItems:"flex-start"}}>
-      <Item
-        noStyle
+      <Space
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+        }}
       >
-        <InputNumber
-          addonAfter={symbol1}
-          value={val1}
-          onChange={getinput1}
+        <Item noStyle>
+          <InputNumber addonAfter={symbol1} value={val1} onChange={getinput1} />
+          <Select
+            defaultValue={{ label: "VND", value: 1 }}
+            options={options}
+            onSelect={select1}
           />
-        <Select
-          defaultValue={{ label: "VND", value: 1 }}
-          options={options}
-          onSelect={select1}
-        />
-      </Item>
+        </Item>
         <Button onClick={() => setSwap(!swap)}>
           <SwapOutlined />
         </Button>
-      <Item
-        noStyle
-      >
-        <InputNumber
-          value={val2} 
-          addonAfter={symbol2}
-          readOnly
-        />
-        <Select
-          defaultValue={{ label: "VND", value: 1 }}
-          options={options}
-          onSelect={select2}
-        />
-      </Item>
+        <Item noStyle>
+          <InputNumber value={val2} addonAfter={symbol2} readOnly />
+          <Select
+            defaultValue={{ label: "VND", value: 1 }}
+            options={options}
+            onSelect={select2}
+          />
+        </Item>
       </Space>
       <Item>
-        <Button type='primary' htmlType='submit'>
+        <Button type="primary" htmlType="submit">
           Submit
         </Button>
       </Item>
     </Form>
-  )
+  );
 }
