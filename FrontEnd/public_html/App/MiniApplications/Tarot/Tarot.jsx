@@ -20,7 +20,7 @@ export default function Tartot({ token }) {
   useEffect(() => {
     console.log(token);
   }, [token]);
-  const getRandomTarot = () => {
+  const getRandomTarot = async () => {
     fetch("http://localhost:3000/tarots", {
       method: "POST",
       headers: {
@@ -28,8 +28,16 @@ export default function Tartot({ token }) {
         token: token,
       },
     })
-      .then((res) => res.json())
-      .then((tarots) => setTarots(tarots));
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(response);
+      }
+      return response.json();
+    })
+    .then((tarots) => setTarots(tarots))
+    .catch(error => {
+      window.alert("Tarots Feature need new server.js to runing");
+    })
   };
   useEffect(() => {
     if (cards != null) {

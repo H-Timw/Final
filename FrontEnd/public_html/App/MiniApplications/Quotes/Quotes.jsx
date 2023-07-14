@@ -43,7 +43,7 @@ export default function Quotes({ token }) {
       setQuotes(newQuotes);
     })
     .catch(error => {
-        window.alert(error.message);
+        window.alert("Can't not connect to server", error.message);
     })
   };
 

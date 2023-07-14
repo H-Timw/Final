@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //select element need to change
 import "./Weather.css";
 import { Button, Input, Typography, Image } from "antd";
@@ -7,8 +8,6 @@ const { Title } = Typography;
 import visionIcon from "./imgs/vision-icon.png";
 import windIcon from "./imgs/wind-icon.png";
 import sunIcon from "./imgs/sun-icon.png";
-// 4h30
-// hwng Hao tue khanh tung le Long viet long hoang long
 
 export default function Weather() {
   const [citySearch, getCitySearch] = useState("Ha Noi");
@@ -17,7 +16,7 @@ export default function Weather() {
   const [temperature, setTemperature] = useState(24);
   // const [dataWeather, getDataWeather] = useState(null);
   const [view, setView] = useState(`10000 (m)`);
-  const [windVelocity, setWindVelocity] = `2.38 (m/s)`;
+  const [windVelocity, setWindVelocity] = useState(`2.38 (m/s)`);
   const [sunStatus, setSunStatus] = useState(`100 (%)`);
   const [weatherStatus, setWeatherStatus] = useState(`Cloud`);
 
@@ -38,13 +37,21 @@ export default function Weather() {
       setYear(time.getFullYear());
     }, 1000);
   });
-  async function changeWeatherUI() {
+  async function changeWeatherUI(city) {
     //get location of city latitude, longitude
-    const cityLocation = `https://api.openweathermap.org/geo/1.0/direct?q=${citySearch}&limit=1&appid=29460cf0e991f8837a3d79babd4e6100`;
-    const data = await fetch(cityLocation).then((res) => res.json());
+    const cityLocation = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=29460cf0e991f8837a3d79babd4e6100`;
+    const data = await fetch(cityLocation)
+    .then((res) => res.json())
+    .catch(error => {
+      window.alert("Can't not connect to server", error.message);
+    });
     //use location to get weather
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=29460cf0e991f8837a3d79babd4e6100`;
-    const weather = await fetch(apiURL).then((res) => res.json());
+    const weather = await fetch(apiURL)
+    .then((res) => res.json())
+    .catch(error => {
+      window.alert("Can't not connect to server", error.message);
+  });
     // getDataWeather(weather);
     //change place
     setCityDisplay(data[0].name);
@@ -60,10 +67,10 @@ export default function Weather() {
     setWindVelocity(`${weather.wind.speed} (m/s)`);
     setSunStatus(`${weather.clouds.all} (%)`);
   }
+  useEffect(()=>{
+    changeWeatherUI(citySearch)
+  },[]);
 
-  useEffect(() => {
-    console.log(citySearch);
-  }, [citySearch]);
   return (
     <div
       className={
@@ -77,12 +84,12 @@ export default function Weather() {
           onChange={(e) => getCitySearch(e.target.value)}
         />
         <div>
-          <h1 id="place">
-            <spam id="city">{cityDisplay}</spam>,
+          <Title level={1} id="place" style={{color:"white",fontWeight:"bold", letterSpacing:"1px"}}>
+            <span id="city">{cityDisplay}</span>,
             <span id="country">{country}</span>
-          </h1>
-          <h4 id="date-n-time">
-            <Title level={2} style={{ marginTop: "2rem" }}>
+          </Title>
+          <div id="date-n-time">
+            <Title level={3} style={{ marginTop: "2rem" , fontWeight:"bold"}}>
               {hours < 10 ? `0${hours}` : `${hours}`}:
               {minutes < 10 ? `0${minutes}` : `${minutes}`}:
               {seconds < 10 ? `0${seconds}` : `${seconds}`}
@@ -91,7 +98,7 @@ export default function Weather() {
               {date < 10 ? `0${date}` : `${date}`}/
               {month < 10 ? `0${month}` : `${month}`}/{year}
             </Title>
-          </h4>
+          </div>
         </div>
         <span id="tempt">{temperature}°C</span>
         <h1 id="status">{weatherStatus}</h1>
@@ -118,7 +125,7 @@ export default function Weather() {
             marginTop: 10,
             height: "auto",
           }}
-          onClick={changeWeatherUI}
+          onClick={changeWeatherUI(citySearch)}
         >
           Search
         </Button>
