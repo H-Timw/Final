@@ -1,14 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
-import { Typography, Space, Input, Button } from "antd";
+/* eslint-disable react/prop-types */
+import { Typography, Space, Input, Button, Form, Checkbox } from "antd";
+const { Item } = Form;
 import { UnlockOutlined, UserOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-// eslint-disable-next-line react/prop-types
 function LoginForm({ onSubmit }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [form] = Form.useForm();
+  const onFinish = (values) => {onSubmit(values.username, values.password)};
+  const onFinishFailed = () => {
+    window.alert("Please Fill All Of Form To Login!!!");
+  };
+  const onReset = () => {
+    form.resetFields();
+  };
   return (
     <div
       style={{
@@ -27,51 +33,70 @@ function LoginForm({ onSubmit }) {
       <Title level={1} style={{ marginBottom: 60 }}>
         Login
       </Title>
-      <hr />
-      <Space direction="vertical">
-        <Space style={{ marginBottom: 20 }}>
-          <Title level={5} style={{ width: 90 }}>
-            Username:
-          </Title>
-          <Input
-            prefix={<UserOutlined />}
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Space>
-        <Space style={{ marginBottom: 60 }}>
-          <Title level={5} style={{ width: 90 }}>
-            Password:
-          </Title>
-          <Input
-            prefix={<UnlockOutlined />}
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Space>
-        <Space style={{ display: "flex", justifyContent: "center" }}>
-          <Button
-            type="primary"
-            onClick={async () => {
-              console.log("submit");
-              onSubmit(username, password);
-            }}
-            style={{ marginRight: 20 }}
-          >
+      <Form
+        name="basic"
+        form={form}
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        style={{
+          maxWidth: 600,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed} // chua can lam
+        autoComplete="off"
+      >
+        <Item
+          label="Username"
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your username!',
+            },
+          ]}
+        >
+          <Input prefix={<UserOutlined style={{marginRight:10}}/>} style={{marginLeft:5}}/>
+        </Item>
+
+        <Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input.Password prefix={<UnlockOutlined style={{marginRight:10}}/>} style={{marginLeft:5}} />
+        </Item>
+
+        <Item
+          name="remember"
+          valuePropName="checked"
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Item>
+        <Space style={{display:'flex', justifyContent:"space-evenly", padding:"0 50px"}}>
+          <Button type="primary" htmlType="submit">
             Submit
           </Button>
-          <Button
-            onClick={() => {
-              setUsername("");
-              setPassword("");
-            }}
-          >
+          <Button onClick={onReset}>
             Reset
           </Button>
         </Space>
-      </Space>
+      </Form>
       <Space
         direction="vertical"
         align="center"

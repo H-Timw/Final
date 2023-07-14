@@ -18,7 +18,7 @@ export default function Quotes({ token }) {
   const [numberOfQuotes, setNumberOfQuotes] = useState(1);
   const [quotes, setQuotes] = useState([]);
   const getSpecificCode = async function () {
-    const res = await fetch("http://localhost:3000/quotes", {
+    fetch("http://localhost:3000/quotes", {
       method: "POST",
       body: JSON.stringify({
         num: numberOfQuotes,
@@ -28,13 +28,23 @@ export default function Quotes({ token }) {
         "Content-type": "application/json",
         token: token,
       },
-    });
-    const data = await res.json();
-    let newQuotes = [];
-    data.map((quote) => {
-      newQuotes.push({ quote: quote.quote, author: quote.author });
-    });
-    setQuotes(newQuotes);
+    })
+    .then(response => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+        return response.json();
+    })
+    .then(data => {
+      let newQuotes = [];
+      data.map((quote) => {
+        newQuotes.push({ quote: quote.quote, author: quote.author });
+      });
+      setQuotes(newQuotes);
+    })
+    .catch(error => {
+        window.alert(error.message);
+    })
   };
 
   return (
