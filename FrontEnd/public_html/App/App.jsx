@@ -485,17 +485,17 @@ export default function App() {
                     type="secondary"
                     style={{
                       color: colorTextByTheme,
-                      display: collapsed ? "none" : "block",
+                      display: collapsed ? "none" : "block", fontSize:13
                     }}
                   >
                     Email:{" "}
-                    {profile.username == "timw"
+                    <nobr>{profile.username == "timw"
                       ? "Timw051201@gmail.com"
                       : profile.username == "hao"
                       ? "Doanminhhaonbk@gmail.com"
                       : language == "us"
                       ? "Email Uncheck"
-                      : "Chưa đăng ký email"}
+                      : "Chưa đăng ký email"}</nobr>
                   </Text>
                   {(profile.username == "timw" ||
                     profile.username == "hao") && (
