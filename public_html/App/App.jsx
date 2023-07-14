@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, Outlet, useNavigate } from "react-router-dom";
+const baseUrl = import.meta.env.BASE_URL;
 import jwtDecode from "jwt-decode";
 //import component
 import MineSweeper from "./MiniApplications/MineSweeper/MineSweeper";
@@ -57,7 +58,7 @@ const { Title, Text } = Typography;
 export default function App() {
   const [theme, setTheme] = useState("dark");
   const [colorTextByTheme, setColorText] = useState("white");
-  const [currentContent, setCurrentContent] = useState(location.pathname);
+  const [currentContent, setCurrentContent] = useState(`${baseUrl}/calculator`);
   const [timerMode, setTimerMode] = useState("Pomodoro");
   const [overTime, statusOverTime] = useState(false);
   const [language, changeLanguage] = useState("us");
@@ -137,14 +138,14 @@ export default function App() {
       null,
       [
         getItem(
-          <Link to="/">
+          <Link to={`${baseUrl}/`}>
             {language == "us" ? `Pomodoro Timer` : `Đồng hồ Pomodoro`}
           </Link>,
           "/",
           <HourglassOutlined />
         ),
         getItem(
-          <Link to="/calculator">
+          <Link to={`${baseUrl}/calculator`}>
             {language == "us" ? `Calculator` : `Máy tính cá nhân`}
           </Link>,
           "/calculator",
@@ -180,14 +181,14 @@ export default function App() {
       null,
       [
         getItem(
-          <Link to="/chessboard">
+          <Link to={`${baseUrl}/chessboard`}>
             {language == "us" ? `ChessBoard` : `Bàn cờ đổi màu`}
           </Link>,
           "/chessboard",
           <AppstoreAddOutlined />
         ),
         getItem(
-          <Link to="/minesweeper">
+          <Link to={`${baseUrl}/minesweeper`}>
             {language == "us" ? `MineSweeper` : `Dò mìn`}
           </Link>,
           "/minesweeper",
@@ -225,14 +226,14 @@ export default function App() {
       null,
       [
         getItem(
-          <Link to="/quotes">
+          <Link to={`${baseUrl}/quotes`}>
             {language == "us" ? `Random Quote` : `Câu nói ngẫu nhiên`}
           </Link>,
           "/quotes",
           <Image preview={false} style={styleIconSubMenu} src={quotes} />
         ),
         getItem(
-          <Link to="/tarot">
+          <Link to={`${baseUrl}/tarot`}>
             {language == "us" ? `Random Tarot` : `Thẻ bài Tarot ngẫu nhiên`}
           </Link>,
           "/tarot",
@@ -268,14 +269,14 @@ export default function App() {
       null,
       [
         getItem(
-          <Link to="/weather">
+          <Link to={`${baseUrl}/weather`}>
             {language == "us" ? `Weather` : `Thời tiết`}
           </Link>,
           "/weather",
           <Image preview={false} style={styleIconSubMenu} src={weatherIcon} />
         ),
         getItem(
-          <Link to="/worldtime">
+          <Link to={`${baseUrl}/worldtime`}>
             {language == "us" ? `World Time` : `Thời gian toàn cầu`}
           </Link>,
           "/worldtime",
@@ -341,7 +342,7 @@ export default function App() {
     const key = `open${Date().now}`;
     const btn = (
       <Space>
-        <Link to="/">
+        <Link to={`${baseUrl}/`}>
           {/* click continue thi quay lai man hinh pomodoro */}
           <Button type="link" size="small" onClick={() => onSubmitNoti(key)}>
             {language == "us" ? `Continue Pomodoro` : `Quay lại học tập`}
@@ -399,8 +400,9 @@ export default function App() {
   const [token, setToken] = useState(null);
   const pathname = window.location.pathname;
   const navigate = useNavigate();
-  if ((!token || !token.length) && pathname !== "/") {
-    navigate("/");
+
+  if ((!token || !token.length) && pathname !== `${baseUrl}/`) {
+    navigate(`${baseUrl}/`);
   }
   useEffect(() => {
     if (token != null) {
@@ -410,7 +412,7 @@ export default function App() {
   }, [token]);
   const logOut = () => {
     setToken(null);
-    navigate("/");
+    navigate(`${baseUrl}/`);
   };
 
   return (
@@ -629,20 +631,20 @@ export default function App() {
                   }}
                 ></PomodoroApp>
                 <Routes>
-                  <Route path="/calculator" Component={Calculator} />
-                  <Route path="/chessboard" Component={CreateChessBoard} />
-                  <Route path="/minesweeper" Component={MineSweeper} />
+                  <Route path={`${baseUrl}/calculator`} Component={Calculator} />
+                  <Route path={`${baseUrl}/chessboard`} Component={CreateChessBoard} />
+                  <Route path={`${baseUrl}/minesweeper`} Component={MineSweeper} />
                   <Route
-                    path="/quotes"
+                    path={`${baseUrl}/quotes`}
                     Component={() => <Quotes {...{ token }} />}
                   />
                   <Route
-                    path="/tarot"
+                    path={`${baseUrl}/tarot`}
                     Component={() => <Tartot {...{ token }} />}
                   />
-                  <Route path="/weather" Component={Weather} />
-                  <Route path="/worldtime" Component={WorlTime} />
-                  <Route path="/" Component={Outlet} />
+                  <Route path={`${baseUrl}/weather`} Component={Weather} />
+                  <Route path={`${baseUrl}/worldtime`} Component={WorlTime} />
+                  <Route path={`${baseUrl}/`} Component={Outlet} />
                 </Routes>
               </Content>
               <Footer
@@ -661,9 +663,9 @@ export default function App() {
           <Outlet />
         </Space>
       ) : (
-        <Routes>
+        <Routes>asdasd
           <Route
-            path="/"
+            path={`${baseUrl}/`}
             element={
               <LoginForm
                 onSubmit={async (username, password) => {
@@ -685,6 +687,5 @@ export default function App() {
           />
         </Routes>
       )}
-    </>
-  );
+</>  );
 }
